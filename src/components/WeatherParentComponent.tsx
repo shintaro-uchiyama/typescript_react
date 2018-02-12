@@ -1,5 +1,6 @@
 import * as React from 'react';
 import SearchBar from './SearchBar';
+import WeatherResult from './WeatherResult';
 
 /**
  * 天気を検索する親コンポーネントのprops
@@ -49,6 +50,7 @@ class WeatherParentComponent extends React.Component<WeatherParentComponentProps
     return (
       <div>
         <SearchBar value={this.state.filterText} onFilterChange={this.handleFilterTextChange} />
+        <WeatherResult value={this.state.filterText} />
       </div>
     );
   }

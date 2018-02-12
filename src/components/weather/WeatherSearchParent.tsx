@@ -1,29 +1,29 @@
 import * as React from 'react';
-import SearchBar from './SearchBar';
-import WeatherResult from './WeatherResult';
+import WeatherSearchBar from './WeatherSearchBar';
+import WeatherSearchResult from './WeatherSearchResult';
 
 /**
  * 天気を検索する親コンポーネントのprops
  */
-interface WeatherParentComponentProps {
+interface WeatherSearchParentProps {
 }
 
 /**
  * 天気を検索する親コンポーネントのstate
  */
-interface WeatherParentComponentState {
+interface WeatherSearchParentState {
   filterText: string;
 }
 
 /**
  * 天気を検索する親コンポーネント
  */
-class WeatherParentComponent extends React.Component<WeatherParentComponentProps, WeatherParentComponentState> {
+class WeatherSearchParent extends React.Component<WeatherSearchParentProps, WeatherSearchParentState> {
   /**
    * コンストラクター
    * @param props 
    */
-  constructor(props: WeatherParentComponentProps) {
+  constructor(props: WeatherSearchParentProps) {
     super(props);
     /// stateの初期化
     this.state = {
@@ -34,7 +34,7 @@ class WeatherParentComponent extends React.Component<WeatherParentComponentProps
   }
 
   /**
-   * inputの入力をstateにセットするメソッド
+   * WeatherSearchBarの入力をstateにセットするメソッド
    * @param e 
    */
   handleFilterTextChange(e: any): void {
@@ -49,11 +49,11 @@ class WeatherParentComponent extends React.Component<WeatherParentComponentProps
   render() {
     return (
       <div>
-        <SearchBar value={this.state.filterText} onFilterChange={this.handleFilterTextChange} />
-        <WeatherResult value={this.state.filterText} />
+        <WeatherSearchBar onFilterChange={this.handleFilterTextChange} />
+        <WeatherSearchResult value={this.state.filterText} />
       </div>
     );
   }
 }
 
-export default WeatherParentComponent;
+export default WeatherSearchParent;

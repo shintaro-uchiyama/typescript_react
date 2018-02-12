@@ -12,7 +12,9 @@ interface WeatherSearchParentProps {
  * 天気を検索する親コンポーネントのstate
  */
 interface WeatherSearchParentState {
-  filterText: string;
+  inputText: string;
+  requestedCity: string;
+  responseData: any;
 }
 
 /**
@@ -27,19 +29,32 @@ class WeatherSearchParent extends React.Component<WeatherSearchParentProps, Weat
     super(props);
     /// stateの初期化
     this.state = {
-      filterText: '',
+      inputText: '',
+      requestedCity: '',
+      responseData: [],
     }
     /// 対象メソッドにthisをバインディング
-    this.handleFilterTextChange = this.handleFilterTextChange.bind(this);
+    this.handleInputTextChange = this.handleInputTextChange.bind(this);
+    this.handleAjaxResponseSet = this.handleAjaxResponseSet.bind(this);
   }
 
   /**
    * WeatherSearchBarの入力をstateにセットするメソッド
    * @param e 
    */
-  handleFilterTextChange(e: any): void {
+  handleInputTextChange(e: any): void {
     this.setState({
-      filterText: e.target.value,
+      inputText: e.target.value,
+    });
+  }
+
+  /**
+   * ajax通信の結果をstateにセットするメソッド
+   */
+  handleAjaxResponseSet(data: any, requestedCity: string): void {
+    this.setState({
+      responseData: data,
+      requestedCity: requestedCity,
     });
   }
 
@@ -49,8 +64,8 @@ class WeatherSearchParent extends React.Component<WeatherSearchParentProps, Weat
   render() {
     return (
       <div>
-        <WeatherSearchBar onFilterChange={this.handleFilterTextChange} />
-        <WeatherSearchResult value={this.state.filterText} />
+        <WeatherSearchBar onInputChange={this.handleInputTextChange} />
+        <WeatherSearchResult inputText={this.state.inputText} requestedCity={this.state.requestedCity} responseData={this.state.responseData} setAjaxResponse={this.handleAjaxResponseSet} />
       </div>
     );
   }

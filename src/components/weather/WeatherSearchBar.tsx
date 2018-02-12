@@ -4,7 +4,7 @@ import * as React from 'react';
  * 検索バーコンポーネントのprops
  */
 interface WeatherSearchBarProps {
-    onFilterChange(e: any): void;
+    onInputChange(e: any): void;
 }
 
 /**
@@ -12,8 +12,8 @@ interface WeatherSearchBarProps {
  * @param props 
  */
 const WeatherSearchBar: React.StatelessComponent<WeatherSearchBarProps> = (props) => {
-    return(
-        <input type="text" placeholder="Input City" onChange={props.onFilterChange} />
+    return (
+        <input type="text" placeholder="Input City" onChange={props.onInputChange} />
     );
 }
 
